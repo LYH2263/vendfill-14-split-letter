@@ -15,6 +15,7 @@ def seed_if_empty(db: Session) -> None:
         ("B2", "巧克力", 15, 10, 5),
         ("C1", "能量棒", 10, 0, 0),
         ("C2", "口香糖", 24, 24, 2),
+        ("D1", "苏打水", 12, 12, 0),  # 全满字母组：汇总中 D 补量为 0，不建空分册
     ]
     lane_ids = []
     for slot, sku, cap, stock, transit in lanes:

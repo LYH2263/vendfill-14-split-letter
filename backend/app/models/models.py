@@ -28,8 +28,24 @@ class Sale(Base):
     sold_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 class RefillOrder(Base):
+    """One split run (批次头). total_fill / letters_json / lines_json are frozen
+    snapshots: reopening history never re-derives them from live lanes."""
     __tablename__ = "refill_orders"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     location_id: Mapped[int] = mapped_column(ForeignKey("locations.id"))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    total_fill: Mapped[int] = mapped_column(Integer, default=0)
+    letters_json: Mapped[str] = mapped_column(Text, default="{}")  # {"A": 15, "D": 0, ...}
+    lines_json: Mapped[str] = mapped_column(Text, default="[]")
+
+class RefillSheet(Base):
+    """One letter group's sheet (分册). lines_json snapshots slot_no + letter per
+    row, so a later lane rename cannot rewrite this sheet's attribution."""
+    __tablename__ = "refill_sheets"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    order_id: Mapped[int] = mapped_column(ForeignKey("refill_orders.id"))
+    location_id: Mapped[int] = mapped_column(ForeignKey("locations.id"))
+    group_letter: Mapped[str] = mapped_column(String(8))
+    total_fill: Mapped[int] = mapped_column(Integer, default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     lines_json: Mapped[str] = mapped_column(Text, default="[]")

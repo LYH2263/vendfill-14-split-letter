@@ -149,6 +149,18 @@ h1 { margin: 0 0 0.25rem; font-size: 1.15rem; font-weight: 800; letter-spacing: 
 }
 @media (max-width: 900px) { .vf-machine-layout { grid-template-columns: 1fr; } }
 
+/* Split sheets: one receipt per letter group */
+.vf-sheet-row {
+  display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;
+}
+.vf-sheet-chip {
+  background: var(--vf-face); color: var(--vf-dim);
+  border: 1px solid #3a4454; border-radius: 3px;
+  padding: 0.3rem 0.6rem; margin: 0 0.4rem 0.4rem 0;
+  font-size: 0.75rem; cursor: pointer;
+}
+.vf-sheet-chip:hover { color: var(--vf-text); border-color: var(--vf-led); }
+
 .card {
   background: #1a222c; border: 1px solid #3a4656;
   border-radius: 6px; padding: 0.85rem 1rem; margin-bottom: 0.85rem;
