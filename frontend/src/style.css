@@ -175,3 +175,13 @@ th { color: var(--vf-dim); font-weight: 600; font-size: 0.75rem; }
 
 .lane { display: flex; height: 28px; background: #0a0c10; border-radius: 4px; overflow: hidden; border: 1px solid #3a4656; margin: 0.35rem 0; }
 .lane-fill { height: 100%; }
+
+/* Split booklets: one receipt per column letter */
+.vf-booklet-row {
+  display: flex; flex-wrap: wrap; gap: 1.4rem 1rem; align-items: flex-start;
+}
+.vf-warn {
+  color: var(--vf-red); font-weight: 700; font-size: 0.82rem; margin: 0.6rem 0 0;
+}
+.vf-warn-text { color: var(--vf-red) !important; }
+tfoot td { border-bottom: none; }
